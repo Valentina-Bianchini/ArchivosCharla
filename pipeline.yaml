@@ -6,25 +6,26 @@
 # Prerequisites: pom.xml and appropriate project structure should exist in the repository.
 
 image: maven:3.8.7
-
+#especifica la imagen de Docker a utilizar para ejecutar el pipeline, 
+#en este caso, una imagen de Maven 3.8.7.
 pipelines:
+#define un bloque de código que contiene todas las definiciones de pipeline.
   default:
+  #define un pipeline llamado "default" que se ejecutará automáticamente 
+  #cada vez que se envía un cambio al repositorio.
     - parallel:
+    #inicia una sección de código que contiene varias etapas que se ejecutan en paralelo.
       - step:
-          name: Clean
-          caches:
-            - maven
-          script:
-            - mvn clean
-      - step:
+      #pasos a ejecutar
           name: Build and Test
           caches:
             - maven
           script:
-            - mvn -B verify --file pom.xml
+            - mvn clean verify
           after-script:
+          #bloque de código que se ejecuta después de que se haya completado el script 
+          #de la etapa anterior
             - mvn serenity:aggregate
-            # Copy the Serenity report files to the target folder
             - cp target/site/serenity/* target/site/ -r
             - mv target/site/serenity/index.html target/site/
       - step:

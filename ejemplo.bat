@@ -7,10 +7,13 @@ serie de comandos se SO que pueden ejectarse en consola
 */ 
 
 /*inicia una nueva instancia de editor de código fuente Visual Studio Code*/
-start code "C:\Users\valentina.bianchini\Desktop\ejemplo.bat"
+start code "C:\Users\valentina.bianchini\Desktop\Charla Jenkins\ejemplo.bat"
 
 /*detiene la ejecución de un archivo batch o script por un período de tiempo determinado antes 
 de continuar con la ejecución*/
+timeout /t 5
+
+start code "C:\Users\valentina.bianchini\Desktop\Charla Jenkins\pipeline.yaml"
 timeout /t 5
 
 /*inicia una nueva instancia de edge en el servidor local de Jenkins*/
